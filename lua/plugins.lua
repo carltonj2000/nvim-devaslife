@@ -24,4 +24,13 @@ packer.startup(function(use)
 
   use 'onsails/lspkind.nvim' -- vscode-like pictograms
 
+  use 'L3MON4D3/LuaSnip'
+
+  use({
+    'nvim-treesitter/nvim-treesitter',
+    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+  })
+
+  use 'windwp/nvim-autopairs'
+  use 'windwp/nvim-ts-autotag'
 end)
