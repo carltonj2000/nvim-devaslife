@@ -34,8 +34,11 @@ packer.startup(function(use)
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
 
+  use 'nvim-tree/nvim-web-devicons'
+
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
   use "nvim-telescope/telescope-file-browser.nvim"
+
 
 end)
