@@ -32,3 +32,6 @@ The NeoVim setup in this repository is based on the
 [Set up Neovim on ...](https://youtu.be/ajmK0ZNcM4Q)
 video and corresponding 
 [blog](https://dev.to/craftzdog/my-neovim-setup-for-react-typescript-tailwind-css-etc-58fb).
+
+## NeoVim Commands
+

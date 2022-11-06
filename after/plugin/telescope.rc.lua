@@ -43,36 +43,20 @@ telescope.setup {
 
 telescope.load_extension("file_browser")
 
-vim.keymap.set('n', ';f',
+vim.keymap.set('n', '<leader>ff',
   function()
-    builtin.find_files({
-      no_ignore = false,
-      hidden = false
-    })
+    builtin.find_files({ no_ignore = false, hidden = false })
   end)
-vim.keymap.set('n', ';a',
+vim.keymap.set('n', '<leader>fa',
   function()
-    builtin.find_files({
-      no_ignore = true,
-      hidden = true
-    })
+    builtin.find_files({ no_ignore = true, hidden = true })
   end)
-vim.keymap.set('n', ';r', function()
-  builtin.live_grep()
-end)
-vim.keymap.set('n', '\\\\', function()
-  builtin.buffers()
-end)
-vim.keymap.set('n', ';t', function()
-  builtin.help_tags()
-end)
-vim.keymap.set('n', ';;', function()
-  builtin.resume()
-end)
-vim.keymap.set('n', ';e', function()
-  builtin.diagnostics()
-end)
-vim.keymap.set("n", "sf", function()
+vim.keymap.set('n', '<leader>fg', function() builtin.live_grep() end)
+vim.keymap.set('n', '<leader>fb', function() builtin.buffers() end)
+vim.keymap.set('n', '<leader>ft', function() builtin.help_tags() end)
+vim.keymap.set('n', '<leader>fr', function() builtin.resume() end)
+vim.keymap.set('n', '<leader>fd', function() builtin.diagnostics() end)
+vim.keymap.set("n", "<leader>bf", function()
   telescope.extensions.file_browser.file_browser({
     path = "%:p:h",
     cwd = telescope_buffer_dir(),
