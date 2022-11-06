@@ -14,10 +14,11 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 cargo install tree-sitter-cli # after in nvim run :TSUpdate
 ```
 
-### Language servers
+### Servers
 
 ```bash
 npm i -g typescript-language-server
+npm install -g @fsouza/prettierd
 ```
 
 Language servers that need binaries will be store in ~/.config/nvim/langservers.

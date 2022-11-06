@@ -44,4 +44,7 @@ packer.startup(function(use)
   use "norcalli/nvim-colorizer.lua"
 
   use "glepnir/lspsaga.nvim"
+
+  use('jose-elias-alvarez/null-ls.nvim')
+  use('MunifTanjim/prettier.nvim')
 end)
