@@ -7,6 +7,7 @@
 - Setup base, highlights, maps, linux/mac/win-clipboard
 - Packer and plugins.lua
 - setup colorize and rest of packages in plugins.lua
+- for lsp's set up mason, mason-config then lspconfig
 
 ```bash
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\

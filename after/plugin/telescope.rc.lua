@@ -56,7 +56,7 @@ end)
 vim.keymap.set("n", "<leader>fg", function()
 	builtin.live_grep()
 end)
-vim.keymap.set("n", "<leader>fb", function()
+vim.keymap.set("n", "<leader>bf", function()
 	builtin.buffers()
 end)
 vim.keymap.set("n", "<leader>ft", function()
@@ -68,7 +68,7 @@ end)
 vim.keymap.set("n", "<leader>fd", function()
 	builtin.diagnostics()
 end)
-vim.keymap.set("n", "<leader>bf", function()
+vim.keymap.set("n", "<leader>fb", function()
 	telescope.extensions.file_browser.file_browser({
 		path = "%:p:h",
 		cwd = telescope_buffer_dir(),
