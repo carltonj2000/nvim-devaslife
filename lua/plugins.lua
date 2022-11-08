@@ -53,4 +53,6 @@ packer.startup(function(use)
 	use("jose-elias-alvarez/null-ls.nvim")
 
 	use("lewis6991/gitsigns.nvim")
+
+	use("akinsho/toggleterm.nvim")
 end)
