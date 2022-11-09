@@ -57,3 +57,56 @@ keymap.set("t", "<C-t>", "<c-\\><c-n>:2ToggleTerm direction=horizontal<cr>", { n
 keymap.set("t", "<C-r>", "<c-\\><c-n>:3ToggleTerm direction=horizontal<cr>", { noremap = true })
 keymap.set("t", "<C-v>", "<c-\\><c-n>:2ToggleTerm direction=vertical<cr>", { noremap = true })
 keymap.set("t", "<C-b>", "<c-\\><c-n>:3ToggleTerm direction=vertical<cr>", { noremap = true })
+-- originally in lspsaga.rc
+local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<leader>ln", "<Cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+vim.keymap.set("n", "<leader>ld", "<Cmd>Lspsaga hover_doc<CR>", opts)
+vim.keymap.set("n", "<leader>li", "<Cmd>Lspsaga lsp_finder<CR>", opts)
+vim.keymap.set("i", "<leader>lh", "<Cmd>Lspsaga signature_help<CR>", opts)
+vim.keymap.set("n", "<leader>lp", "<Cmd>Lspsaga preview_definition<CR>", opts)
+vim.keymap.set("n", "<leader>lr", "<Cmd>Lspsaga rename<CR>", opts)
+vim.keymap.set("n", "<leader>lf", "<Cmd>lua vim.lsp.buf.format({timeout_ms = 2000})<CR>", opts)
+-- initiall in telescope.rc
+local status, telescope = pcall(require, "telescope")
+if not status then
+	return
+end
+local builtin = require("telescope.builtin")
+local function telescope_buffer_dir()
+	return vim.fn.expand("%:p:h")
+end
+
+
+vim.keymap.set("n", "<leader>ff", function()
+	builtin.find_files({ no_ignore = false, hidden = false })
+end)
+vim.keymap.set("n", "<leader>fa", function()
+	builtin.find_files({ no_ignore = true, hidden = true })
+end)
+vim.keymap.set("n", "<leader>fg", function()
+	builtin.live_grep()
+end)
+vim.keymap.set("n", "<leader>bf", function()
+	builtin.buffers()
+end)
+vim.keymap.set("n", "<leader>ft", function()
+	builtin.help_tags()
+end)
+vim.keymap.set("n", "<leader>fr", function()
+	builtin.resume()
+end)
+vim.keymap.set("n", "<leader>fd", function()
+	builtin.diagnostics()
+end)
+vim.keymap.set("n", "<leader>fb", function()
+	telescope.extensions.file_browser.file_browser({
+		path = "%:p:h",
+		cwd = telescope_buffer_dir(),
+		respect_gitignore = false,
+		hidden = true,
+		grouped = true,
+		previewer = false,
+		initial_mode = "normal",
+		layout_config = { height = 40 },
+	})
+end)

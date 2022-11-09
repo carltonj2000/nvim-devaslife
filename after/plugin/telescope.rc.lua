@@ -3,11 +3,6 @@ if not status then
 	return
 end
 local actions = require("telescope.actions")
-local builtin = require("telescope.builtin")
-
-local function telescope_buffer_dir()
-	return vim.fn.expand("%:p:h")
-end
 
 local fb_actions = require("telescope").extensions.file_browser.actions
 
@@ -47,36 +42,3 @@ telescope.setup({
 
 telescope.load_extension("file_browser")
 
-vim.keymap.set("n", "<leader>ff", function()
-	builtin.find_files({ no_ignore = false, hidden = false })
-end)
-vim.keymap.set("n", "<leader>fa", function()
-	builtin.find_files({ no_ignore = true, hidden = true })
-end)
-vim.keymap.set("n", "<leader>fg", function()
-	builtin.live_grep()
-end)
-vim.keymap.set("n", "<leader>bf", function()
-	builtin.buffers()
-end)
-vim.keymap.set("n", "<leader>ft", function()
-	builtin.help_tags()
-end)
-vim.keymap.set("n", "<leader>fr", function()
-	builtin.resume()
-end)
-vim.keymap.set("n", "<leader>fd", function()
-	builtin.diagnostics()
-end)
-vim.keymap.set("n", "<leader>fb", function()
-	telescope.extensions.file_browser.file_browser({
-		path = "%:p:h",
-		cwd = telescope_buffer_dir(),
-		respect_gitignore = false,
-		hidden = true,
-		grouped = true,
-		previewer = false,
-		initial_mode = "normal",
-		layout_config = { height = 40 },
-	})
-end)
