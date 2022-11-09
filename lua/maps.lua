@@ -43,11 +43,12 @@ keymap.set("i", "kj", "<esc>")
 -- terminal
 local Terminal = require("toggleterm.terminal").Terminal
 local toggle_lazygit = function()
-	local lazygit = Terminal:new({ cmd = "lazygit", direction = "float" })
-	return lazygit:toggle()
+  local lazygit = Terminal:new({ cmd = "lazygit", direction = "float" })
+  return lazygit:toggle()
 end
 keymap.set("n", "<leader>tt", ":ToggleTerm direction=vertical size=80<cr>")
 keymap.set("n", "<leader>tg", toggle_lazygit)
+keymap.set("t", "ff", "<c-\\><c-n>", { noremap = true })
 keymap.set("t", "<C-H>", "<c-\\><c-n><c-w>h", { noremap = true })
 keymap.set("t", "<C-J>", "<c-\\><c-n><c-w>j", { noremap = true })
 keymap.set("t", "<C-K>", "<c-\\><c-n><c-w>k", { noremap = true })
