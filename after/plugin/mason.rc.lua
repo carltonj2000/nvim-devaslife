@@ -15,6 +15,7 @@ lspconfig.setup({
 		"cssls",
 		"cssmodules_ls",
 		"dockerls",
+		"gopls",
 		"html",
 		"marksman",
 		"rust_analyzer",

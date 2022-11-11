@@ -4,6 +4,7 @@ local keymap = vim.keymap
 -- del without yank -- not fan of below
 -- keymap.set('n', 'x', '"_x')
 -- inc/dec
+keymap.set("n", "<leader>q", ":qa<cr>")
 keymap.set("n", "<leader>nv", ":e ~/.config/nvim/lua/maps.lua<cr>")
 keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")
@@ -11,9 +12,6 @@ keymap.set("n", "-", "<C-x>")
 keymap.set("n", "dw", 'vb"_d')
 -- selecte all
 keymap.set("n", "<C-a>", "ggvG$")
--- tab open/close aka workspace
-keymap.set("n", "<leader>wa", ":tabedit<Return>", { silent = true })
-keymap.set("n", "<leader>wx", "<C-w>c", { silent = true })
 -- split window
 keymap.set("n", "ss", ":split<Return><C-w>w", { silent = true })
 keymap.set("n", "sv", ":vsplit<Return><C-w>w", { silent = true })
@@ -43,8 +41,8 @@ keymap.set("i", "kj", "<esc>")
 -- terminal
 local Terminal = require("toggleterm.terminal").Terminal
 local toggle_lazygit = function()
-  local lazygit = Terminal:new({ cmd = "lazygit", direction = "float" })
-  return lazygit:toggle()
+	local lazygit = Terminal:new({ cmd = "lazygit", direction = "float" })
+	return lazygit:toggle()
 end
 keymap.set("n", "<leader>tt", ":ToggleTerm direction=vertical size=80<cr>")
 keymap.set("n", "<leader>tg", toggle_lazygit)
@@ -63,9 +61,15 @@ vim.keymap.set("n", "<leader>ln", "<Cmd>Lspsaga diagnostic_jump_next<CR>", opts)
 vim.keymap.set("n", "<leader>ld", "<Cmd>Lspsaga hover_doc<CR>", opts)
 vim.keymap.set("n", "<leader>li", "<Cmd>Lspsaga lsp_finder<CR>", opts)
 vim.keymap.set("i", "<leader>lh", "<Cmd>Lspsaga signature_help<CR>", opts)
-vim.keymap.set("n", "<leader>lp", "<Cmd>Lspsaga preview_definition<CR>", opts)
+vim.keymap.set("n", "<leader>lp", "<Cmd>Lspsaga peek_definition<CR>", opts)
 vim.keymap.set("n", "<leader>lr", "<Cmd>Lspsaga rename<CR>", opts)
 vim.keymap.set("n", "<leader>lf", "<Cmd>lua vim.lsp.buf.format({timeout_ms = 2000})<CR>", opts)
+--
+LspConfigs = {}
+LspConfigs.on_attach_go = function(cleint, bufnr)
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
+end
 -- initiall in telescope.rc
 local status, telescope = pcall(require, "telescope")
 if not status then
@@ -75,7 +79,6 @@ local builtin = require("telescope.builtin")
 local function telescope_buffer_dir()
 	return vim.fn.expand("%:p:h")
 end
-
 
 vim.keymap.set("n", "<leader>ff", function()
 	builtin.find_files({ no_ignore = false, hidden = false })
@@ -110,3 +113,9 @@ vim.keymap.set("n", "<leader>fb", function()
 		layout_config = { height = 40 },
 	})
 end)
+-- tab open/close aka workspace
+keymap.set("n", "<leader>wc", ":tabedit<Return>", { silent = true })
+keymap.set("n", "<leader>wx", "<C-w>c", { silent = true })
+-- initially in bufferline.rc for workspace management
+vim.keymap.set("n", "<leader>wn", "<Cmd>BufferLineCycleNext<CR>", {})
+vim.keymap.set("n", "<leader>wp", "<Cmd>BufferLineCyclePrev<CR>", {})

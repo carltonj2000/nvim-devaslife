@@ -1,6 +1,5 @@
 # NeoVIM Setup By devaslife
 
-
 ## Installation Order
 
 - NeoVim
@@ -20,6 +19,7 @@ cargo install tree-sitter-cli # after in nvim run :TSUpdate
 ```bash
 npm i -g typescript-language-server
 npm install -g @fsouza/prettierd
+go install golang.org/x/tools/gopls@latest # mv $HOME/go to $PATH
 ```
 
 Language servers that need binaries will be store in ~/.config/nvim/langservers.
@@ -32,8 +32,7 @@ and create a symbolic link in /usr/local/bin to the bin directory exe.
 
 The NeoVim setup in this repository is based on the
 [Set up Neovim on ...](https://youtu.be/ajmK0ZNcM4Q)
-video and corresponding 
+video and corresponding
 [blog](https://dev.to/craftzdog/my-neovim-setup-for-react-typescript-tailwind-css-etc-58fb).
 
 ## NeoVim Commands
-

@@ -4,7 +4,6 @@ if not status then
 end
 
 local on_attach = function(client, bufnr)
-	-- format on save
 	if client.server_capabilities.documentFormattingProvider then
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			group = vim.api.nvim_create_augroup("Format", { clear = true }),
@@ -16,7 +15,6 @@ local on_attach = function(client, bufnr)
 	end
 end
 
--- TypeScript
 nvim_lsp.tsserver.setup({
 	on_attach = on_attach,
 	filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
@@ -36,4 +34,8 @@ nvim_lsp.sumneko_lua.setup({
 			},
 		},
 	},
+})
+
+nvim_lsp.gopls.setup({
+	on_attach = LspConfigs.on_attach_go,
 })
