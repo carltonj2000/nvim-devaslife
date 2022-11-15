@@ -15,13 +15,17 @@ local on_attach = function(client, bufnr)
 	end
 end
 
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 nvim_lsp.tsserver.setup({
+	capabilities = capabilities,
 	on_attach = on_attach,
 	filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
 	cmd = { "typescript-language-server", "--stdio" },
 })
 
 nvim_lsp.sumneko_lua.setup({
+	capabilities = capabilities,
 	on_attach = on_attach,
 	settings = {
 		Lua = {
@@ -37,5 +41,6 @@ nvim_lsp.sumneko_lua.setup({
 })
 
 nvim_lsp.gopls.setup({
+	capabilities = capabilities,
 	on_attach = LspConfigs.on_attach_go,
 })

@@ -1,5 +1,7 @@
 # NeoVIM Setup By devaslife
 
+[Neovim Builtin LSP Setup Guide](https://youtu.be/puWgHa7k3SY)
+
 ## Installation Order
 
 - NeoVim

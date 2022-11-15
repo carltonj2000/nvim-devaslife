@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function()
-		vim.lsp.buf.format( { timeout_ms = 2000})
+		vim.lsp.buf.format({ timeout_ms = 2000 })
 	end,
 })
 

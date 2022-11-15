@@ -5,6 +5,8 @@ local keymap = vim.keymap
 -- keymap.set('n', 'x', '"_x')
 -- inc/dec
 keymap.set("n", "<leader>q", ":qa<cr>")
+keymap.set("n", "<leader>x", ":bd<cr>")
+keymap.set("n", "<leader>h", ":noh<cr>")
 keymap.set("n", "<leader>nv", ":e ~/.config/nvim/lua/maps.lua<cr>")
 keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")
@@ -57,8 +59,8 @@ keymap.set("t", "<C-v>", "<c-\\><c-n>:2ToggleTerm direction=vertical<cr>", { nor
 keymap.set("t", "<C-b>", "<c-\\><c-n>:3ToggleTerm direction=vertical<cr>", { noremap = true })
 -- originally in lspsaga.rc
 local opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<leader>ln", "<Cmd>Lspsaga diagnostic_jump_next<CR>", opts)
 vim.keymap.set("n", "<leader>ld", "<Cmd>Lspsaga hover_doc<CR>", opts)
+vim.keymap.set("n", "<leader>la", "<Cmd>Lspsaga code_action<CR>", opts)
 vim.keymap.set("n", "<leader>li", "<Cmd>Lspsaga lsp_finder<CR>", opts)
 vim.keymap.set("i", "<leader>lh", "<Cmd>Lspsaga signature_help<CR>", opts)
 vim.keymap.set("n", "<leader>lp", "<Cmd>Lspsaga peek_definition<CR>", opts)
@@ -66,10 +68,14 @@ vim.keymap.set("n", "<leader>lr", "<Cmd>Lspsaga rename<CR>", opts)
 vim.keymap.set("n", "<leader>lf", "<Cmd>lua vim.lsp.buf.format({timeout_ms = 2000})<CR>", opts)
 --
 LspConfigs = {}
-LspConfigs.on_attach_go = function(cleint, bufnr)
+LspConfigs.on_attach_go = function()
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
+	vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
+	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = 0 })
 end
+vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next, { buffer = 0 })
+vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, { buffer = 0 })
 -- initiall in telescope.rc
 local status, telescope = pcall(require, "telescope")
 if not status then
@@ -89,7 +95,7 @@ end)
 vim.keymap.set("n", "<leader>fg", function()
 	builtin.live_grep()
 end)
-vim.keymap.set("n", "<leader>bf", function()
+vim.keymap.set("n", "<leader>fb", function()
 	builtin.buffers()
 end)
 vim.keymap.set("n", "<leader>ft", function()
@@ -101,7 +107,7 @@ end)
 vim.keymap.set("n", "<leader>fd", function()
 	builtin.diagnostics()
 end)
-vim.keymap.set("n", "<leader>fb", function()
+vim.keymap.set("n", "<leader>fe", function()
 	telescope.extensions.file_browser.file_browser({
 		path = "%:p:h",
 		cwd = telescope_buffer_dir(),
@@ -119,3 +125,17 @@ keymap.set("n", "<leader>wx", "<C-w>c", { silent = true })
 -- initially in bufferline.rc for workspace management
 vim.keymap.set("n", "<leader>wn", "<Cmd>BufferLineCycleNext<CR>", {})
 vim.keymap.set("n", "<leader>wp", "<Cmd>BufferLineCyclePrev<CR>", {})
+-- from cmp originally
+CmpConfigs = {}
+CmpConfigs.mapping = function(cmp)
+	return cmp.mapping.preset.insert({
+		["<C-d>"] = cmp.mapping.scroll_docs(-4),
+		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-e>"] = cmp.mapping.close(),
+		["<CR>"] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = true,
+		}),
+	})
+end
